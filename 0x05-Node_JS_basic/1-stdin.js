@@ -1,10 +1,25 @@
-process.stdout.write('Welcome to Holberton School, what is your name?\n');
+const readline = require('readline');
 
-process.stdin.on('data', (data) => {
-  const name = data.toString().trim();
-  process.stdout.write(`Your name is: ${name}\n`);
+// Create readline interface for capturing user input
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
 });
 
-process.on('exit', () => {
-  process.stdout.write('This important software is now closing\n');
+// Display welcome message
+console.log('Welcome to Holberton School, what is your name?\n');
+
+// Capture user input
+rl.question('', (name) => {
+  // Display user's name
+  console.log(`Your name is: ${name}`);
+
+  // Close the readline interface
+  rl.close();
+});
+
+// Handle program exit
+rl.on('close', () => {
+  console.log('This important software is now closing\n');
+  process.exit(0);
 });
